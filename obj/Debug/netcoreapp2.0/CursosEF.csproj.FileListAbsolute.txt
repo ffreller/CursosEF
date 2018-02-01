@@ -1,0 +1,10 @@
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\obj\Debug\netcoreapp2.0\CursosEF.csproj.CoreCompileInputs.cache
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\obj\Debug\netcoreapp2.0\CursosEF.AssemblyInfoInputs.cache
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\obj\Debug\netcoreapp2.0\CursosEF.AssemblyInfo.cs
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\bin\Debug\netcoreapp2.0\CursosEF.deps.json
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\bin\Debug\netcoreapp2.0\CursosEF.runtimeconfig.json
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\bin\Debug\netcoreapp2.0\CursosEF.runtimeconfig.dev.json
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\bin\Debug\netcoreapp2.0\CursosEF.dll
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\bin\Debug\netcoreapp2.0\CursosEF.pdb
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\obj\Debug\netcoreapp2.0\CursosEF.dll
+C:\Users\40809588897\Desktop\Programar\2018\3semana\CursosEF\obj\Debug\netcoreapp2.0\CursosEF.pdb
