@@ -43,7 +43,7 @@ namespace CursosEF.Controllers
         [ProducesResponseType(typeof(string),400)]
         public Curso Listar(int idCurso)
         {
-            return contexto.Curso.Include("Pedido").Where(x => x.idCurso == idCurso).FirstOrDefault();
+           return contexto.Curso.Where(x => x.idCurso == idCurso).FirstOrDefault();
         }
 
         /// <summary>

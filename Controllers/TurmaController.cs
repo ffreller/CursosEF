@@ -43,7 +43,7 @@ namespace TurmasEF.Controllers
         [ProducesResponseType(typeof(string),400)]
         public Turma Listar(int idTurma)
         {
-            return contexto.Turma.Include("Pedido").Where(x => x.idTurma == idTurma).FirstOrDefault();
+            return contexto.Turma.Where(x => x.idTurma == idTurma).FirstOrDefault();
         }
 
         /// <summary>
