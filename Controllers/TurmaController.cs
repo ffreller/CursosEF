@@ -17,19 +17,44 @@ namespace TurmasEF.Controllers
         {
             this.contexto = contexto;
         }
-        [HttpGet]
+
+        /// <summary>
+        /// Lista todas as turmas cadastradas
+        /// </summary>
+        /// <returns> lista de turmas</returns>
+        /// <responde code "200"> Retorna uma lista de turma</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
+        [HttpGet(Name = "Turmas")]
+        [ProducesResponseType(typeof(List<Turma>),200)]
+        [ProducesResponseType(typeof(string),400)]
         public IEnumerable<Turma> Listar()
         {
             return contexto.Turma.ToList();
         }
 
-        [HttpGet("{idTurma}")]
+         /// <summary>
+        /// Lista dados da turma requisitada
+        /// </summary>
+        /// <returns> turma requisitada </returns>
+        /// <responde code "200"> Retorna uma lista de turma</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
+        [HttpGet("{idTurma}", Name = "TurmaAtual")]
+        [ProducesResponseType(typeof(Turma),200)]
+        [ProducesResponseType(typeof(string),400)]
         public Turma Listar(int idTurma)
         {
             return contexto.Turma.Include("Pedido").Where(x => x.idTurma == idTurma).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Cadastra nova turma
+        /// </summary>
+        /// <returns> Lista de turma </returns>
+        /// <responde code "200"> Retorna uma lista de turma</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpPost]
+        [ProducesResponseType(typeof(Turma),200)]
+        [ProducesResponseType(typeof(BadRequestObjectResult),400)]
         public IActionResult Cadastro([FromBody] Turma turma)
         {
             if(!ModelState.IsValid){
@@ -39,12 +64,20 @@ namespace TurmasEF.Controllers
             contexto.Turma.Add(turma);
             int x = contexto.SaveChanges();
             if (x > 0)
-                return Ok();
+                return CreatedAtRoute("TurmaAtual", new{idTurma = turma.idTurma}, turma);
             else
                 return BadRequest();
         }
 
+        /// <summary>
+        /// Atualiza a turma indicada
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de turma</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpPut("{idTurma}")]
+        [ProducesResponseType(typeof(Turma),200)]
+        [ProducesResponseType(typeof(BadRequestObjectResult),400)]
         public IActionResult Atualizar (int idTurma, [FromBody] Turma turma)
         {
             if (turma == null || turma.idTurma!=idTurma){
@@ -66,13 +99,21 @@ namespace TurmasEF.Controllers
             int rs = contexto.SaveChanges();
 
             if(rs > 0)
-                return Ok();
+                return CreatedAtRoute("TurmaAtual", new{idTurma = turma.idTurma}, turma);
             else
                 return BadRequest();
 
         }
 
+         /// <summary>
+        /// Deleta turma indicada
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de turma</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpDelete("{idTurma}")]
+        [ProducesResponseType(typeof(List<Turma>),200)]
+        [ProducesResponseType(typeof(NotFoundObjectResult),400)]
         public IActionResult Apagar (int idTurma)
         {
             var turma = contexto.Turma.Where(x=>x.idTurma==idTurma).FirstOrDefault();
@@ -82,7 +123,7 @@ namespace TurmasEF.Controllers
             contexto.Turma.Remove(turma);
             int rs = contexto.SaveChanges();
             if(rs > 0)
-                return Ok();
+                return Redirect("Turmas");
             else
                 return BadRequest();
         }

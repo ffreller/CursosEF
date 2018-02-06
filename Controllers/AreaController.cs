@@ -17,19 +17,44 @@ namespace CursosEF.Controllers
         {
             this.contexto = contexto;
         }
-        [HttpGet]
+
+        /// <summary>
+        /// Lista todas as áreas cadastradas
+        /// </summary>
+        /// <returns> lista de áreas</returns>
+        /// <responde code "200"> Retorna uma lista de área</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
+        [HttpGet(Name = "Areas")]
+        [ProducesResponseType(typeof(List<Area>),200)]
+        [ProducesResponseType(typeof(string),400)]
         public IEnumerable<Area> Listar()
         {
             return contexto.Area.ToList();
         }
 
-        [HttpGet("{idArea}")]
+        /// <summary>
+        /// Lista dados da área requisitada
+        /// </summary>
+        /// <returns> área requisitada </returns>
+        /// <responde code "200"> Retorna uma lista de área</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
+        [HttpGet("{idArea}", Name="AreaAtual")]
+        [ProducesResponseType(typeof(Area),200)]
+        [ProducesResponseType(typeof(string),400)]
         public Area Listar(int idArea)
         {
             return contexto.Area.Where(x => x.idArea == idArea).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Cadastra nova área
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de área</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpPost]
+        [ProducesResponseType(typeof(Area),200)]
+        [ProducesResponseType(typeof(BadRequestObjectResult),400)]
         public IActionResult Cadastro([FromBody] Area area)
         {
             if(!ModelState.IsValid){
@@ -39,12 +64,20 @@ namespace CursosEF.Controllers
             contexto.Area.Add(area);
             int x = contexto.SaveChanges();
             if (x > 0)
-                return Ok();
+                return CreatedAtRoute("AreaAtual", new{idTurma = area.idArea}, area);
             else
                 return BadRequest();
         }
-
+        
+        /// <summary>
+        /// Atualiza a área indicada
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de área</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpPut("{idArea}")]
+        [ProducesResponseType(typeof(Area),200)]
+        [ProducesResponseType(typeof(BadRequestObjectResult),400)]
         public IActionResult Atualizar (int idArea, [FromBody] Area area)
         {
             if (area == null || area.idArea!=idArea){
@@ -62,13 +95,21 @@ namespace CursosEF.Controllers
             int rs = contexto.SaveChanges();
 
             if(rs > 0)
-                return Ok();
+                return CreatedAtRoute("AreaAtual", new{idTurma = area.idArea}, area);
             else
                 return BadRequest();
 
         }
 
+        /// <summary>
+        /// Deleta área indicada
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de área</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpDelete("{idArea}")]
+        [ProducesResponseType(typeof(List<Area>),200)]
+        [ProducesResponseType(typeof(NotFoundObjectResult),400)]
         public IActionResult Apagar (int idArea)
         {
             var area = contexto.Area.Where(x=>x.idArea==idArea).FirstOrDefault();
@@ -78,7 +119,7 @@ namespace CursosEF.Controllers
             contexto.Area.Remove(area);
             int rs = contexto.SaveChanges();
             if(rs > 0)
-                return Ok();
+                return Redirect("Areas");
             else
                 return BadRequest();
         }

@@ -13,4 +13,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
   </ItemGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug/AnyCPU'">
+    <DocumentationFile>bin\debugznetcoreapp2.0\CursoOnline.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

@@ -17,19 +17,44 @@ namespace CursosEF.Controllers
         {
             this.contexto = contexto;
         }
-        [HttpGet]
+
+        /// <summary>
+        /// Lista todas os cursos cadastrados
+        /// </summary>
+        /// <returns> lista de cursos</returns>
+        /// <responde code "200"> Retorna uma lista de curso</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
+        [HttpGet(Name = "Cursos")]
+        [ProducesResponseType(typeof(List<Curso>),200)]
+        [ProducesResponseType(typeof(string),400)]
         public IEnumerable<Curso> Listar()
         {
             return contexto.Curso.ToList();
         }
 
-        [HttpGet("{idCurso}")]
+        /// <summary>
+        /// Lista dados do curso requisitado
+        /// </summary>
+        /// <returns> curso requisitado </returns>
+        /// <responde code "200"> Retorna uma lista de curso</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
+        [HttpGet("{idCurso}", Name = "CursoAtual")]
+        [ProducesResponseType(typeof(Curso),200)]
+        [ProducesResponseType(typeof(string),400)]
         public Curso Listar(int idCurso)
         {
             return contexto.Curso.Include("Pedido").Where(x => x.idCurso == idCurso).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Cadastra novo curso
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de curso</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpPost]
+        [ProducesResponseType(typeof(Curso),200)]
+        [ProducesResponseType(typeof(BadRequestObjectResult),400)]
         public IActionResult Cadastro([FromBody] Curso curso)
         {
             if(!ModelState.IsValid){
@@ -39,12 +64,20 @@ namespace CursosEF.Controllers
             contexto.Curso.Add(curso);
             int x = contexto.SaveChanges();
             if (x > 0)
-                return Ok();
+                return CreatedAtRoute("CursoAtual", new{idTurma = curso.idCurso}, curso);
             else
                 return BadRequest();
         }
 
+        /// <summary>
+        /// Atualiza o curso indicada
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de curso</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpPut("{idCurso}")]
+        [ProducesResponseType(typeof(Curso),200)]
+        [ProducesResponseType(typeof(BadRequestObjectResult),400)]
         public IActionResult Atualizar (int idCurso, [FromBody] Curso curso)
         {
             if (curso == null || curso.idCurso!=idCurso){
@@ -63,13 +96,21 @@ namespace CursosEF.Controllers
             int rs = contexto.SaveChanges();
 
             if(rs > 0)
-                return Ok();
+                 return CreatedAtRoute("CursoAtual", new{idTurma = curso.idCurso}, curso);
             else
                 return BadRequest();
 
         }
 
+        /// <summary>
+        /// Deleta curso indicado
+        /// </summary>
+        /// <returns> ok </returns>
+        /// <responde code "200"> Retorna uma lista de curso</response>
+        /// /// <responde code "400"> Ocorreu um erro</response>
         [HttpDelete("{idCurso}")]
+        [ProducesResponseType(typeof(List<Curso>),200)]
+        [ProducesResponseType(typeof(NotFoundObjectResult),400)]
         public IActionResult Apagar (int idCurso)
         {
             var curso = contexto.Curso.Where(x=>x.idCurso==idCurso).FirstOrDefault();
@@ -79,7 +120,7 @@ namespace CursosEF.Controllers
             contexto.Curso.Remove(curso);
             int rs = contexto.SaveChanges();
             if(rs > 0)
-                return Ok();
+                return Redirect("Cursos");
             else
                 return BadRequest();
         }

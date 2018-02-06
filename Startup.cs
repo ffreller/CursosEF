@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CursosEF.Contextos;
@@ -37,7 +38,11 @@ namespace CursosEF
                     Url = "www"
                 }
             });
+            var caminhoBase = AppContext.BaseDirectory;
+            var caminhoxml = Path.Combine(caminhoBase, "CursooOline.xml");
+
         });
+        
 
             services.AddDbContext<CursosContexto>(options=>options.UseSqlServer(Configuration.GetConnectionString("BancoCursosEF")));
             
