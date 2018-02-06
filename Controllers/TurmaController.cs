@@ -22,8 +22,8 @@ namespace TurmasEF.Controllers
         /// Lista todas as turmas cadastradas
         /// </summary>
         /// <returns> lista de turmas</returns>
-        /// <responde code "200"> Retorna uma lista de turma</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de turma</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpGet(Name = "Turmas")]
         [ProducesResponseType(typeof(List<Turma>),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -36,8 +36,8 @@ namespace TurmasEF.Controllers
         /// Lista dados da turma requisitada
         /// </summary>
         /// <returns> turma requisitada </returns>
-        /// <responde code "200"> Retorna uma lista de turma</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de turma</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpGet("{idTurma}", Name = "TurmaAtual")]
         [ProducesResponseType(typeof(Turma),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -50,8 +50,8 @@ namespace TurmasEF.Controllers
         /// Cadastra nova turma
         /// </summary>
         /// <returns> Lista de turma </returns>
-        /// <responde code "200"> Retorna uma lista de turma</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de turma</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpPost]
         [ProducesResponseType(typeof(Turma),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -73,8 +73,8 @@ namespace TurmasEF.Controllers
         /// Atualiza a turma indicada
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de turma</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de turma</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpPut("{idTurma}")]
         [ProducesResponseType(typeof(Turma),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -109,8 +109,8 @@ namespace TurmasEF.Controllers
         /// Deleta turma indicada
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de turma</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de turma</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpDelete("{idTurma}")]
         [ProducesResponseType(typeof(List<Turma>),200)]
         [ProducesResponseType(typeof(NotFoundObjectResult),400)]

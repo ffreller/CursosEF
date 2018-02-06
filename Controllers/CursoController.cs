@@ -22,8 +22,8 @@ namespace CursosEF.Controllers
         /// Lista todas os cursos cadastrados
         /// </summary>
         /// <returns> lista de cursos</returns>
-        /// <responde code "200"> Retorna uma lista de curso</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de curso</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpGet(Name = "Cursos")]
         [ProducesResponseType(typeof(List<Curso>),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -36,8 +36,8 @@ namespace CursosEF.Controllers
         /// Lista dados do curso requisitado
         /// </summary>
         /// <returns> curso requisitado </returns>
-        /// <responde code "200"> Retorna uma lista de curso</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de curso</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpGet("{idCurso}", Name = "CursoAtual")]
         [ProducesResponseType(typeof(Curso),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -50,8 +50,8 @@ namespace CursosEF.Controllers
         /// Cadastra novo curso
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de curso</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de curso</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpPost]
         [ProducesResponseType(typeof(Curso),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -73,8 +73,8 @@ namespace CursosEF.Controllers
         /// Atualiza o curso indicada
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de curso</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de curso</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpPut("{idCurso}")]
         [ProducesResponseType(typeof(Curso),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -106,8 +106,8 @@ namespace CursosEF.Controllers
         /// Deleta curso indicado
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de curso</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de curso</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpDelete("{idCurso}")]
         [ProducesResponseType(typeof(List<Curso>),200)]
         [ProducesResponseType(typeof(NotFoundObjectResult),400)]

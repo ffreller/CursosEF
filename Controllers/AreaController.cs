@@ -22,8 +22,8 @@ namespace CursosEF.Controllers
         /// Lista todas as áreas cadastradas
         /// </summary>
         /// <returns> lista de áreas</returns>
-        /// <responde code "200"> Retorna uma lista de área</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de área</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpGet(Name = "Areas")]
         [ProducesResponseType(typeof(List<Area>),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -36,8 +36,8 @@ namespace CursosEF.Controllers
         /// Lista dados da área requisitada
         /// </summary>
         /// <returns> área requisitada </returns>
-        /// <responde code "200"> Retorna uma lista de área</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de área</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpGet("{idArea}", Name="AreaAtual")]
         [ProducesResponseType(typeof(Area),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -50,8 +50,8 @@ namespace CursosEF.Controllers
         /// Cadastra nova área
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de área</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de área</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpPost]
         [ProducesResponseType(typeof(Area),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -73,8 +73,8 @@ namespace CursosEF.Controllers
         /// Atualiza a área indicada
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de área</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de área</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpPut("{idArea}")]
         [ProducesResponseType(typeof(Area),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -105,8 +105,8 @@ namespace CursosEF.Controllers
         /// Deleta área indicada
         /// </summary>
         /// <returns> ok </returns>
-        /// <responde code "200"> Retorna uma lista de área</response>
-        /// /// <responde code "400"> Ocorreu um erro</response>
+        /// <response code "200"> Retorna uma lista de área</response>
+        /// /// <response code "400"> Ocorreu um erro</response>
         [HttpDelete("{idArea}")]
         [ProducesResponseType(typeof(List<Area>),200)]
         [ProducesResponseType(typeof(NotFoundObjectResult),400)]
