@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CursosEF
 {
@@ -23,7 +24,23 @@ namespace CursosEF
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c => {c.SwaggerDoc("v1", new Info
+            {
+                Version = "v1",
+                Title = "Api Forum",
+                Description = "Doc",
+                TermsOfService = "None",
+                Contact = new Contact
+                {
+                    Name = "Fernando",
+                    Email = "email",
+                    Url = "www"
+                }
+            });
+        });
+
             services.AddDbContext<CursosContexto>(options=>options.UseSqlServer(Configuration.GetConnectionString("BancoCursosEF")));
+            
             services.AddMvc();
         }
 
@@ -35,7 +52,10 @@ namespace CursosEF
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI( c => {c.SwaggerEndpoint("/swagger/v1/swagger.json","Api Cursos Online");});
             app.UseMvc();
+           
         }
     }
 }
