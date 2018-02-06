@@ -53,14 +53,14 @@ namespace TurmasEF.Controllers
             var tur = contexto.Turma.FirstOrDefault();
             if (tur == null)
                 return NotFound();
-            
+
             tur.idTurma = turma.idTurma;
             tur.idCurso = turma.idCurso;
             tur.datain = turma.datain;
             tur.datafim=turma.datafim;
             tur.horarioin = turma.horarioin;
             tur.horariofim = turma.horariofim;
-            tur.diasemana = tur.diasemana;
+            tur.diasemana = turma.diasemana;
 
             contexto.Turma.Update(tur);
             int rs = contexto.SaveChanges();
