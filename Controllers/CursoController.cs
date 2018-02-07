@@ -64,7 +64,7 @@ namespace CursosEF.Controllers
             contexto.Curso.Add(curso);
             int x = contexto.SaveChanges();
             if (x > 0)
-                return CreatedAtRoute("CursoAtual", new{idTurma = curso.idCurso}, curso);
+                return Ok();
             else
                 return BadRequest();
         }
@@ -96,7 +96,7 @@ namespace CursosEF.Controllers
             int rs = contexto.SaveChanges();
 
             if(rs > 0)
-                 return CreatedAtRoute("CursoAtual", new{idTurma = curso.idCurso}, curso);
+                return Ok();
             else
                 return BadRequest();
 
@@ -120,7 +120,7 @@ namespace CursosEF.Controllers
             contexto.Curso.Remove(curso);
             int rs = contexto.SaveChanges();
             if(rs > 0)
-                return Redirect("Cursos");
+                return Ok();
             else
                 return BadRequest();
         }

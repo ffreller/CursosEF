@@ -64,7 +64,7 @@ namespace TurmasEF.Controllers
             contexto.Turma.Add(turma);
             int x = contexto.SaveChanges();
             if (x > 0)
-                return CreatedAtRoute("TurmaAtual", new{idTurma = turma.idTurma}, turma);
+                return Ok();
             else
                 return BadRequest();
         }
@@ -99,7 +99,7 @@ namespace TurmasEF.Controllers
             int rs = contexto.SaveChanges();
 
             if(rs > 0)
-                return CreatedAtRoute("TurmaAtual", new{idTurma = turma.idTurma}, turma);
+                return Ok();
             else
                 return BadRequest();
 
@@ -123,7 +123,7 @@ namespace TurmasEF.Controllers
             contexto.Turma.Remove(turma);
             int rs = contexto.SaveChanges();
             if(rs > 0)
-                return Redirect("Turmas");
+                return Ok();
             else
                 return BadRequest();
         }

@@ -23,7 +23,8 @@ namespace CursosEF.Controllers
         /// </summary>
         /// <returns> lista de áreas</returns>
         /// <response code "200"> Retorna uma lista de área</response>
-        /// /// <response code "400"> Ocorreu um erro</response>
+        /// <response code "400"> Ocorreu um erro</response>
+        /// <response code "404"> Url não encontrada</response>
         [HttpGet(Name = "Areas")]
         [ProducesResponseType(typeof(List<Area>),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -35,9 +36,11 @@ namespace CursosEF.Controllers
         /// <summary>
         /// Lista dados da área requisitada
         /// </summary>
+        /// <param Name="idArea"></param>
         /// <returns> área requisitada </returns>
         /// <response code "200"> Retorna uma lista de área</response>
         /// /// <response code "400"> Ocorreu um erro</response>
+        /// /// <response code "404"> Url não encontrada</response>
         [HttpGet("{idArea}", Name="AreaAtual")]
         [ProducesResponseType(typeof(Area),200)]
         [ProducesResponseType(typeof(string),400)]
@@ -49,9 +52,11 @@ namespace CursosEF.Controllers
         /// <summary>
         /// Cadastra nova área
         /// </summary>
+        /// <param Name="area"></param>
         /// <returns> ok </returns>
         /// <response code "200"> Retorna uma lista de área</response>
         /// /// <response code "400"> Ocorreu um erro</response>
+        /// /// <response code "404"> Url não encontrada</response>
         [HttpPost]
         [ProducesResponseType(typeof(Area),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -64,7 +69,7 @@ namespace CursosEF.Controllers
             contexto.Area.Add(area);
             int x = contexto.SaveChanges();
             if (x > 0)
-                return CreatedAtRoute("AreaAtual", new{idTurma = area.idArea}, area);
+                return Ok();
             else
                 return BadRequest();
         }
@@ -72,9 +77,12 @@ namespace CursosEF.Controllers
         /// <summary>
         /// Atualiza a área indicada
         /// </summary>
+        /// <param Name="idArea"></param>
+        /// <param Name="area"></param>
         /// <returns> ok </returns>
         /// <response code "200"> Retorna uma lista de área</response>
-        /// /// <response code "400"> Ocorreu um erro</response>
+        /// <response code "400"> Ocorreu um erro</response>
+        /// <response code "404"> Url não encontrada</response>
         [HttpPut("{idArea}")]
         [ProducesResponseType(typeof(Area),200)]
         [ProducesResponseType(typeof(BadRequestObjectResult),400)]
@@ -95,7 +103,7 @@ namespace CursosEF.Controllers
             int rs = contexto.SaveChanges();
 
             if(rs > 0)
-                return CreatedAtRoute("AreaAtual", new{idTurma = area.idArea}, area);
+                return Ok();
             else
                 return BadRequest();
 
@@ -104,9 +112,11 @@ namespace CursosEF.Controllers
         /// <summary>
         /// Deleta área indicada
         /// </summary>
+        /// <param Name="idArea"></param>
         /// <returns> ok </returns>
         /// <response code "200"> Retorna uma lista de área</response>
-        /// /// <response code "400"> Ocorreu um erro</response>
+        /// <response code "400"> Ocorreu um erro</response>
+        /// <response code "404"> Url não encontrada</response>
         [HttpDelete("{idArea}")]
         [ProducesResponseType(typeof(List<Area>),200)]
         [ProducesResponseType(typeof(NotFoundObjectResult),400)]
@@ -119,7 +129,7 @@ namespace CursosEF.Controllers
             contexto.Area.Remove(area);
             int rs = contexto.SaveChanges();
             if(rs > 0)
-                return Redirect("Areas");
+                return Ok();
             else
                 return BadRequest();
         }
